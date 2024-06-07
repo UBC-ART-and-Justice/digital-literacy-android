@@ -11,36 +11,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.digitalliteracy.ui.theme.DigitalLiteracyTheme
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.compose.ui.viewinterop.AndroidView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DigitalLiteracyTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+            WebViewScreen()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+fun WebViewScreen() {
+    AndroidView(
+        factory = { context ->
+            WebView(context).apply {
+                webViewClient = WebViewClient()     // Prevents opening an external browser
+                loadUrl("file:///android_asset/site/index.html") // Load local content
+            }
+        },
+        modifier = Modifier.fillMaxSize() // Make WebView fill the screen
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DigitalLiteracyTheme {
-        Greeting("Android")
-    }
 }
