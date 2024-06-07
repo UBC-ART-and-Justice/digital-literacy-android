@@ -13,7 +13,7 @@ Android app for the project, to run the course content on the tablets.
     - Connect the device to the computer
     - In Android Studio, see if `Lenovo TB-8506F` is listed in the `Connected Devices` dropdown in the top center of the window.
     - Click the green play button and wait for the app to be installed on the device.
-5. Build the app by clicking `Build > Build Bundle(s) / APK(s) > Build APK(s)` in the top menu of Android Studio.
+5. Build the app by clicking `Build > Build Bundle(s) / APK(s) > Build APK(s)` in the top menu of Android Studio. You can find the APK file in the `app/build/outputs/apk/debug` folder.
 
 
 
@@ -80,3 +80,33 @@ This is included in case the app needs to be recreated from scratch.
     }
     ```
 3. Go to the `Creating a new version of the app with updated content` section to continue.
+
+
+##  Add a custom icon to the app
+
+While this is not necessary, it can be helpful to differentiate the app from others on the device. See [this guide](https://developer.android.com/codelabs/basic-android-kotlin-compose-training-change-app-icon#0) for more information.
+
+1. Navigate to `app > src > main > res`. The various `mipmap` folders contain the icons for the app.
+2. Delete the old drawable resources that contain the Android icon and green grid background. You should **uncheck** the `Safe delete` option when deleting these files, since we are replacing them. We don't want to change any code that references these files.
+    ```
+    # Delete these files
+    drawable/ic_launcher_background.xml
+    drawable/ic_launcher_foreground.xml
+
+    # Delete these folders
+    mipmap-anydpi-v26/
+    mipmap-hdpi/
+    mipmap-mdpi/
+    mipmap-xhdpi/
+    mipmap-xxhdpi/
+    mipmap-xxxhdpi/
+    ```
+3. Create a new Image Asset. You can either right-click on the res directory and choose New > Image Asset, or you can click on the Resource Manager tab, click the + icon, then select Image Asset from the dropdown.
+    - Wait for the tool to open
+    - Leave most of the default settings as is
+    - With `Foreground Layer` selected, click on the `Path` and select the file you want to use. This should be a square image with a transparent background. You can toggle the `Trim` option to see what looks better in the preview.
+    - You can do the same for the `Background Layer` if you want to add a background to the icon.
+    - Click `Next` and `Finish` to save the icon.
+4. Test the app on the device to ensure everything is working as expected.
+
+If you want to see the image files that were used for this app, go to `~/icons/`
